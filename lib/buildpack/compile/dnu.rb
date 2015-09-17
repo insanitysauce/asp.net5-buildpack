@@ -27,7 +27,7 @@ module AspNet5Buildpack
       @shell.env['MONO_THREADS_PER_CPU'] = '2000'
       @shell.path << '/app/mono/bin'
       project_list = AppDir.new(dir, out).with_project_json.join(' ')
-      cmd = "bash -c 'source #{dir}/.dnx/dnvm/dnvm.sh; dnvm use default -r mono -a x64; cd #{dir}; dnu restore #{project_list}'"
+      cmd = "bash -c 'source #{dir}/.dnx/dnvm/dnvm.sh; dnvm use default -r mono -a x64; cd #{dir}; dnu restore -p http://fwproxy.ldschurch.org:80 #{project_list}'"
       @shell.exec(cmd, out)
     end
   end

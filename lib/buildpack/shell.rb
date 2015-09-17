@@ -19,7 +19,7 @@ require 'open3'
 module AspNet5Buildpack
   class Shell
     def exec(cmd, out)
-      Open3.popen2e(expand(cmd)) do |_, oe, t|
+      Open3.popen2e({"http_proxy"=>"http://fwproxy.ldschurch.org:80","https_proxy"=>"http://fwproxy.ldschurch.org:80"},expand(cmd)) do |_, oe, t|
         oe.each do |line|
           out.print line.chomp
         end
